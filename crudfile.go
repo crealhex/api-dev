@@ -3,30 +3,16 @@ package main
 var list Users
 
 func loadInitialData() {
-	u1 := User{
+	crealhex := User{
 		ID: 1,
 		Username: "crealhex",
 		Fullname: "Luis Enco",
+		Age: 20,
+		Email: "encoluis@hotmail.com",
 		City: "Lima",
 		Phone: "952736356",
 	}
-
-	u2 := User{
-		ID: 2,
-		Username: "crealhex",
-		Fullname: "Luis Enco",
-		City: "Lima",
-		Phone: "952736356",
-	}
-
-	u3 := User{
-		ID: 3,
-		Username: "crealhex",
-		Fullname: "Luis Enco",
-		City: "Lima",
-		Phone: "952736356",
-	}
-	list = append(list, &u1, &u2, &u3)
+	list = append(list, &crealhex)
 }
 
 func getAll() Users {
@@ -55,16 +41,15 @@ func genNewID() int {
 	return 1
 }
 
-func update(id int, c *User) {
-	for _, v := range list {
+func update(id int, u *User) {
+	for i, v := range list {
 		if v.ID == id {
-			v = c
+			list[i] = u
 			return
 		}
 	}
 }
 
-func delete(id int) {
-	list[len(list) - 1], list[id] = list[id], list[len(list) - 1]
-	list = list[:len(list) - 1]
+func deleteu(id int) {
+	list = append(list[:id-1], list[id:]...)
 }
