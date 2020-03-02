@@ -1,4 +1,4 @@
-# API con librerías estandar de Go
+# API Friendlist sin librerías externas
 Los datos de un usuario: 
 - Nombre
 - Correo
