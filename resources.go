@@ -8,6 +8,24 @@ import (
 	"strconv"
 )
 
+func friendsManager(w http.ResponseWriter, r *http.Request) {
+	user := r.URL.Query().Get("user")
+	if user == "" {
+		http.Error(w, "missing user name in query string", http.StatusBadRequest)
+		return
+	}
+	add := r.URL.Query().Get("add")
+	if add == "" {
+		http.Error(w, "missing add name in query string", http.StatusBadRequest)
+		return
+	}
+
+	uno, _ := strconv.Atoi(user)
+	dos, _ := strconv.Atoi(add)
+
+	addFriend(uno, dos)
+}
+
 func solo(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		http.Error(w, "Unable to access", http.StatusBadRequest)
@@ -39,10 +57,10 @@ func solo(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodDelete {
 		deleteu(userID)
 	}
-	user, _ := json.Marshal(getByID(userID))
+	//user, _ := json.Marshal(getByID(userID))
 	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	log.Println(w.Write(user))
+	//log.Println(w.Write(user))
 }
 
 // nu defines: new user
